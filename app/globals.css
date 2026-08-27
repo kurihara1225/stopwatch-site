@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #171916;
+  --paper: #f4f0e7;
+  --accent: #e85132;
+  --line: rgba(23, 25, 22, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background:
+    linear-gradient(rgba(23, 25, 22, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 25, 22, 0.035) 1px, transparent 1px),
+    var(--paper);
+  background-size: 32px 32px;
+  color: var(--ink);
+  font-family: Arial, "Hiragino Kaku Gothic ProN", sans-serif;
+}
+
+button { font: inherit; }
+
+.page-shell {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-shell::before,
+.page-shell::after {
+  content: "";
+  position: fixed;
+  width: 180px;
+  height: 180px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+.page-shell::before { left: -90px; top: 15%; }
+.page-shell::after { right: -90px; bottom: 12%; }
+.stopwatch { width: min(100%, 720px); position: relative; z-index: 1; }
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 14px;
+  margin-bottom: 52px;
+  font: 700 11px/1 var(--font-geist-mono), monospace;
+  letter-spacing: 0.18em;
+}
+
+.brand-row p { margin: 0; }
+.brand-mark { width: 11px; height: 11px; background: var(--accent); border-radius: 50%; }
+.status { margin-left: auto; color: #77786f; }
+.status.is-running { color: var(--accent); }
+.dial { text-align: center; padding: 16px 0 44px; }
+.eyebrow, .unit, .footer-note {
+  font: 650 10px/1.2 var(--font-geist-mono), monospace;
+  letter-spacing: 0.32em;
+}
+
+.eyebrow { color: var(--accent); margin: 0 0 18px; }
+.time {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  font-family: var(--font-geist-mono), monospace;
+  font-variant-numeric: tabular-nums;
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+}
+
+.time > span { font-size: clamp(68px, 16vw, 138px); font-weight: 520; }
+.time small { font-size: clamp(24px, 5vw, 42px); color: var(--accent); letter-spacing: -0.06em; }
+.unit { margin: 22px 0 0; color: #73756e; }
+.controls { display: grid; grid-template-columns: 1fr 1.5fr 1fr; gap: 10px; }
+.controls button {
+  min-height: 58px;
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  font-weight: 720;
+  letter-spacing: 0.04em;
+  transition: transform 140ms ease, background 140ms ease, color 140ms ease;
+}
+
+.controls button:hover:not(:disabled) { transform: translateY(-2px); }
+.controls button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.controls button:disabled { opacity: 0.34; cursor: not-allowed; }
+.secondary { background: transparent; color: var(--ink); }
+.primary { background: var(--ink); color: var(--paper); }
+.primary span { margin-right: 9px; color: var(--accent); }
+.primary.stop { background: var(--accent); border-color: var(--accent); }
+.primary.stop span { color: var(--paper); }
+.laps { margin-top: 42px; border-top: 1px solid var(--ink); }
+.laps-heading { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--line); }
+.laps-heading h2, .laps-heading span { margin: 0; font: 700 11px/1 var(--font-geist-mono), monospace; letter-spacing: 0.14em; }
+.laps-heading span { color: var(--accent); }
+.empty { margin: 0; padding: 24px 0; color: #6f716a; font-size: 13px; }
+.laps ol { list-style: none; margin: 0; padding: 0; max-height: 190px; overflow-y: auto; }
+.laps li { display: flex; justify-content: space-between; align-items: center; padding: 15px 2px; border-bottom: 1px solid var(--line); }
+.laps li span { font: 650 11px/1 var(--font-geist-mono), monospace; color: #72746d; letter-spacing: 0.12em; }
+.laps li strong { font: 540 20px/1 var(--font-geist-mono), monospace; font-variant-numeric: tabular-nums; }
+.footer-note { position: fixed; bottom: 16px; right: 20px; margin: 0; color: #8a8b83; }
+
+@media (max-width: 560px) {
+  .page-shell { place-items: start center; padding-top: 26px; }
+  .brand-row { margin-bottom: 38px; }
+  .controls { grid-template-columns: 1fr 1fr; }
+  .primary { grid-column: 1 / -1; grid-row: 1; }
+  .dial { padding-bottom: 32px; }
+  .laps { margin-top: 30px; }
+  .footer-note { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .controls button { transition: none; }
+}
