@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="集中した時間を、シンプルに計るストップウォッチ。" />
+    <meta property="og:title" content="Minute / Moment — ストップウォッチ" />
+    <meta property="og:description" content="集中した時間を、シンプルに計るストップウォッチ。" />
+    <meta property="og:image" content="public/og.png" />
+    <link rel="icon" href="public/favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Minute / Moment — ストップウォッチ</title>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="stopwatch" aria-label="ストップウォッチ">
+        <header class="brand-row">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <p>MINUTE / MOMENT</p>
+          <span class="status" id="status">待機中</span>
+        </header>
+
+        <div class="dial" aria-live="polite" aria-atomic="true">
+          <p class="eyebrow">STOPWATCH</p>
+          <div class="time"><span id="time-main">00:00</span><small id="time-fraction">.00</small></div>
+          <p class="unit">MIN&nbsp;&nbsp;&nbsp;&nbsp;SEC</p>
+        </div>
+
+        <div class="controls">
+          <button class="secondary" id="reset" disabled>リセット</button>
+          <button class="primary" id="toggle"><span aria-hidden="true">▶</span>スタート</button>
+          <button class="secondary" id="lap" disabled>ラップ</button>
+        </div>
+
+        <section class="laps" aria-label="ラップタイム">
+          <div class="laps-heading"><h2>ラップタイム</h2><span id="lap-count">00</span></div>
+          <p class="empty" id="empty">計測中に「ラップ」を押すと記録されます。</p>
+          <ol id="lap-list"></ol>
+        </section>
+      </section>
+      <p class="footer-note">FOCUS ON THIS MOMENT.</p>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
